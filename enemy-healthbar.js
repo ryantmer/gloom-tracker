@@ -11,17 +11,22 @@ export class Healthbar extends LitElement {
 	static get styles() {
 		return css`
 			:host {
-				color: white;
+				display: flex;
+				flex-direction: row;
+				align-items: center;
 			}
 			.healthbar {
 				background-color: white;
-				width: 100px;
-				height: 30px;
+				height: 2rem;
+				width: 1.2rem;
 				border: black solid 1px;
-				border-radius: 5px;
+				border-radius: 0.2rem;
 				display: flex;
-				justify-content: left;
+				flex-direction: column;
+				justify-content: flex-end;
 				overflow: hidden;
+				flex-grow: 1;
+				box-sizing: border-box;
 			}
 			.health {
 				background-color: red;
@@ -29,6 +34,11 @@ export class Healthbar extends LitElement {
 				justify-content: center;
 				align-items: center;
 				transition: width 0.2s ease-in-out;
+			}
+			.health-value {
+				margin-right: 0.1rem;
+				min-width: 1rem;
+				text-align: right;
 			}
 		`;
 	}
@@ -41,10 +51,9 @@ export class Healthbar extends LitElement {
 
 	render() {
 		return html`
+			<span class="health-value">${this.currentHealth}</span>
 			<div class="healthbar">
-				<span class="health" style="width: ${(this.currentHealth / this.maxHealth) * 100}%">
-					${this.currentHealth}
-				</span>
+				<div class="health" style="height: ${(this.currentHealth / this.maxHealth) * 100}%"></div>
 			</div>
 		`;
 	}

@@ -29,7 +29,8 @@ export class GloomEnemy extends LitElement {
 				display: flex;
 				flex-direction: column;
 				border: 3px solid black;
-				padding: 1rem;
+				padding-left: 0.2rem;
+				font-family: 'PirataOne', 'Open Sans', sans-serif;
 			}
 
 			.header-bar {
@@ -37,7 +38,10 @@ export class GloomEnemy extends LitElement {
 				align-items: center;
 			}
 			.header-bar > * {
-				margin-right: 1rem;
+				margin-right: 0.2rem;
+			}
+			.header-bar > *:last-child {
+				margin-right: 0;
 			}
 
 			.enemy-name {
@@ -45,12 +49,9 @@ export class GloomEnemy extends LitElement {
 			}
 
 			.instance-buttons > button {
-				margin-right: 0.2rem;
 				border: 1px solid black;
-				border-radius: 5px;
-				padding: 0.5rem;
-				padding-right: 1rem;
-				padding-left: 1rem;
+				min-width: 2rem;
+				min-height: 2rem;
 				color: white;
 				font-family: 'PirataOne', 'Open Sans', sans-serif;
 			}
@@ -68,23 +69,30 @@ export class GloomEnemy extends LitElement {
 			.stat-bar {
 				display: flex;
 				flex-direction: row;
+				padding: 0.2rem;
 			}
 			.stat-bar.elite {
 				background: rgb(117, 115, 3);
 			}
 			.enemy-stat {
-				margin-right: 10px;
-				padding: 5px;
+				margin-right: 0.5rem;
+				font-size: 0.7rem;
+			}
+			.stat-bar > *:last-child {
+				margin-right: 0;
 			}
 			.enemy-stat > img {
-				height: 15px;
-				width: 15px;
+				height: 0.8rem;
+				width: 0.8rem;
+				vertical-align: middle;
 			}
 
+			.enemy-instances {
+				display: flex;
+				flex-wrap: wrap;
+			}
 			gloom-enemy-instance {
 				display: inline-block;
-				margin-top: 1rem;
-				margin-right: 1rem;
 			}
 		`;
 	}
@@ -121,7 +129,7 @@ export class GloomEnemy extends LitElement {
 			} else {
 				buttonClass = 'add-enemy';
 				buttonHandler = this._addEnemyInstance.bind(this, i);
-				enemyInstances.push(html`<span />`);
+				enemyInstances.push(html`</>`);
 			}
 
 			instanceButtons.push(html`<button class="${buttonClass}" @click="${buttonHandler}">${i + 1}</button>`);
@@ -129,20 +137,20 @@ export class GloomEnemy extends LitElement {
 
 		const enemyStats = html`
 			<span class="stat-bar">
-				<span class="enemy-stat">HP: ${this._normalEnemy.hp}</span>
-				<span class="enemy-stat"><img src="images/attack.svg" />: ${this._normalEnemy.attack ?? '-'}</span>
-				<span class="enemy-stat"><img src="images/move.svg" />: ${this._normalEnemy.move ?? '-'}</span>
-				<span class="enemy-stat"><img src="images/range.svg" />: ${this._normalEnemy.range ?? '-'}</span>
-				<span class="enemy-stat"><img src="images/shield.svg" />: ${this._normalEnemy.shield ?? '-'}</span>
-				<span class="enemy-stat"><img src="images/target.svg" />: ${this._normalEnemy.target ?? '-'}</span>
+				<span class="enemy-stat">HP ${this._normalEnemy.hp}</span>
+				<span class="enemy-stat"><img src="images/attack.svg" /> ${this._normalEnemy.attack ?? '-'}</span>
+				<span class="enemy-stat"><img src="images/move.svg" /> ${this._normalEnemy.move ?? '-'}</span>
+				<span class="enemy-stat"><img src="images/range.svg" /> ${this._normalEnemy.range ?? '-'}</span>
+				<span class="enemy-stat"><img src="images/shield.svg" /> ${this._normalEnemy.shield ?? '-'}</span>
+				<span class="enemy-stat"><img src="images/target.svg" /> ${this._normalEnemy.target ?? '-'}</span>
 			</span>
 			<span class="stat-bar elite">
-				<span class="enemy-stat">HP: ${this._eliteEnemy.hp}</span>
-				<span class="enemy-stat"><img src="images/attack.svg" />: ${this._eliteEnemy.attack ?? '-'}</span>
-				<span class="enemy-stat"><img src="images/move.svg" />: ${this._eliteEnemy.move ?? '-'}</span>
-				<span class="enemy-stat"><img src="images/range.svg" />: ${this._eliteEnemy.range ?? '-'}</span>
-				<span class="enemy-stat"><img src="images/shield.svg" />: ${this._eliteEnemy.shield ?? '-'}</span>
-				<span class="enemy-stat"><img src="images/target.svg" />: ${this._eliteEnemy.target ?? '-'}</span>
+				<span class="enemy-stat">HP ${this._eliteEnemy.hp}</span>
+				<span class="enemy-stat"><img src="images/attack.svg" /> ${this._eliteEnemy.attack ?? '-'}</span>
+				<span class="enemy-stat"><img src="images/move.svg" /> ${this._eliteEnemy.move ?? '-'}</span>
+				<span class="enemy-stat"><img src="images/range.svg" /> ${this._eliteEnemy.range ?? '-'}</span>
+				<span class="enemy-stat"><img src="images/shield.svg" /> ${this._eliteEnemy.shield ?? '-'}</span>
+				<span class="enemy-stat"><img src="images/target.svg" /> ${this._eliteEnemy.target ?? '-'}</span>
 			</span>
 		`;
 
@@ -152,7 +160,9 @@ export class GloomEnemy extends LitElement {
 				<span class="instance-buttons">${instanceButtons}</span>
 				<span class="stats-bar">${enemyStats}</span>
 			</span>
-			<span>${enemyInstances}</span>
+			<span class="enemy-instances">
+				${enemyInstances}
+			</span>
 		`;
 	}
 }

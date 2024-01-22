@@ -1,7 +1,7 @@
 const enemyData = {
 	banditGuard: {
 		name: 'Bandit Guard',
-		maxInstances: 11,
+		maxInstances: 21,
 		statsByLevel: [
 			[
 				{

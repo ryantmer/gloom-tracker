@@ -22,25 +22,30 @@ export class GloomEnemyInstance extends LitElement {
 			}
 			.wrapper {
 				background-color: white;
-				padding: 0.2rem;
-				border-color: black;
 				border-radius: 0.2rem;
 				color: black;
 				display: flex;
 				align-items: center;
 			}
 			.wrapper > * {
-				margin: 0.2rem;
+				margin: 0.1rem;
 			}
 			.elite {
 				background-color: rgb(117, 115, 3);
 				color: white;
 			}
-			.enemy-text {
-				font-size: 1.2 rem;
-			}
 			button {
-				padding: 0.5rem;
+				padding: 0;
+				height: 2rem;
+				font-family: 'PirataOne', 'Open Sans', sans-serif;
+				font-size: 0.8rem;
+			}
+			.elite-button {
+				width: 2rem;
+			}
+			.health-button {
+				width: 1.5rem;
+				font-size: 1.2rem;
 			}
 		`;
 	}
@@ -65,7 +70,7 @@ export class GloomEnemyInstance extends LitElement {
 	}
 
 	render() {
-		const isEliteButton = html` <button class="elite-button" @click="${this._toggleElite}">Rank</button>`;
+		const isEliteButton = html` <button class="elite-button" @click="${this._toggleElite}"># ${this.instanceNumber}</button>`;
 		const healthbar = html`
 			<enemy-healthbar
 				currentHealth=${this._currentHealth}
@@ -77,7 +82,6 @@ export class GloomEnemyInstance extends LitElement {
 
 		return html`
 			<div class="wrapper ${this._isElite ? 'elite' : ''}">
-				<span class="enemy-text"># ${this.instanceNumber}</span>
 				${isEliteButton} ${healthbar} ${increaseHealthButton} ${decreaseHealthButton}
 			</div>
 		`;
@@ -89,7 +93,7 @@ export class GloomEnemyInstance extends LitElement {
 	}
 
 	_increaseHealth(e) {
-		if (this._currentHealth + 1 <= this._maxHealth) {
+		if (this._currentHealth + 1 <= (this._isElite ? this._eliteMaxHealth : this._maxHealth)) {
 			this._currentHealth++;
 		}
 	}
