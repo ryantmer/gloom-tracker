@@ -37,8 +37,6 @@ export class Healthbar extends LitElement {
 			}
 			.health-value {
 				margin-right: 0.1rem;
-				min-width: 1rem;
-				text-align: right;
 			}
 		`;
 	}

@@ -44,8 +44,8 @@ export class GloomEnemy extends LitElement {
 
 			.instance-buttons > button {
 				border: 1px solid black;
-				min-width: 2rem;
-				min-height: 2rem;
+				min-width: 1.5rem;
+				min-height: 1.5rem;
 				color: white;
 				font-family: 'PirataOne', 'Open Sans', sans-serif;
 			}

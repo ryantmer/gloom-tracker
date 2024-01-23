@@ -62,7 +62,7 @@ export class GloomEnemyInstance extends LitElement {
 				border-radius: 0.2rem;
 				padding: 0 0.5rem 0 0.5rem;
 			}
-			button.status-button.selected {
+			button.selected {
 				background: lightslategrey;
 			}
 			.status-image {
@@ -157,18 +157,18 @@ export class GloomEnemyInstance extends LitElement {
 						<span>${statusEffectButtons}</span>
 						<span>
 							<button class="dialog-button" @click="${this._clearStatusEffects}">Clear</button>
-							<button class="dialog-button" @click="${this._toggleElite}">Toggle Rank</button>
+							<button class="dialog-button ${this._isElite ? 'selected' : ''}" @click="${this._toggleElite}">Elite</button>
 							<button class="dialog-button" @click="${this._closeDialog}">Close</button>
 						</span>
 					</div>
 				</dialog>
 				<button class="open-dialog-button" @click="${this._openDialog}"># ${this.instanceNumber}</button>
+				<button class="health-button" @click="${this._decreaseHealth}">-</button>
 				<enemy-healthbar
 					currentHealth=${this._currentHealth}
 					maxHealth="${this._isElite ? this._eliteMaxHealth : this._maxHealth}"
 				></enemy-healthbar>
 				<button class="health-button" @click="${this._increaseHealth}">+</button>
-				<button class="health-button" @click="${this._decreaseHealth}">-</button>
 				${appliedStatusEffects}
 			</div>
 		`;
