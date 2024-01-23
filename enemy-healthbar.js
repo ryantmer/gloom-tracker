@@ -33,7 +33,7 @@ export class Healthbar extends LitElement {
 				display: flex;
 				justify-content: center;
 				align-items: center;
-				transition: width 0.2s ease-in-out;
+				transition: height 0.2s ease-in-out;
 			}
 			.health-value {
 				margin-right: 0.1rem;

@@ -5,22 +5,16 @@ import './enemy-instance.js';
 export class GloomEnemy extends LitElement {
 	static get properties() {
 		return {
-			id: { type: String },
+			name: { type: String },
 			level: { type: Number },
-			_normalEnemy: { type: Enemy },
-			_eliteEnemy: { type: Enemy },
-			_maxInstances: { type: Number },
+			maxInstances: { type: Number },
 			_enemyInstances: { type: Array },
 		};
 	}
 
 	firstUpdated(changedProperties) {
 		super.firstUpdated(changedProperties);
-
-		this._normalEnemy = new Enemy(this.id, this.level, false);
-		this._eliteEnemy = new Enemy(this.id, this.level, true);
-		this._maxInstances = this._normalEnemy.maxInstances;
-		this._enemyInstances = new Array(this._normalEnemy.maxInstances).fill(null);
+		this._enemyInstances = new Array(this.maxInstances).fill(null);
 	}
 
 	static get styles() {
@@ -56,15 +50,16 @@ export class GloomEnemy extends LitElement {
 				font-family: 'PirataOne', 'Open Sans', sans-serif;
 			}
 			button.add-enemy {
-				background-color: transparent;
+				background-color: #d3d3d3;
+				color: black;
 			}
 			button.remove-enemy {
-				background-color: red;
+				background-color: #555555;
 			}
 
 			.stats-bar {
 				display: inline-flex;
-				flex-direction: column;
+				flex-direction: row;
 			}
 			.stat-bar {
 				display: flex;
@@ -72,7 +67,7 @@ export class GloomEnemy extends LitElement {
 				padding: 0.2rem;
 			}
 			.stat-bar.elite {
-				background: rgb(117, 115, 3);
+				background: rgba(117, 115, 3, 0.5);
 			}
 			.enemy-stat {
 				margin-right: 0.5rem;
@@ -86,7 +81,6 @@ export class GloomEnemy extends LitElement {
 				width: 0.8rem;
 				vertical-align: middle;
 			}
-
 			.enemy-instances {
 				display: flex;
 				flex-wrap: wrap;
@@ -99,7 +93,7 @@ export class GloomEnemy extends LitElement {
 
 	_addEnemyInstance(i) {
 		this._enemyInstances[i] = html`<gloom-enemy-instance
-			id=${this.id}
+			id=${this.name}
 			instanceNumber=${i + 1}
 			level=${this.level}
 		></gloom-enemy-instance>`;
@@ -112,14 +106,17 @@ export class GloomEnemy extends LitElement {
 	}
 
 	render() {
-		if (!this._normalEnemy || !this._eliteEnemy) {
+		if (!this._enemyInstances) {
 			return;
 		}
+
+		const normalEnemy = new Enemy(this.name, this.level, false);
+		const eliteEnemy = new Enemy(this.name, this.level, true);
 
 		const instanceButtons = [];
 		const enemyInstances = [];
 
-		for (let i = 0; i < this._maxInstances; i++) {
+		for (let i = 0; i < this.maxInstances; i++) {
 			let buttonClass = '';
 			let buttonHandler = null;
 			if (this._enemyInstances[i]) {
@@ -135,34 +132,42 @@ export class GloomEnemy extends LitElement {
 			instanceButtons.push(html`<button class="${buttonClass}" @click="${buttonHandler}">${i + 1}</button>`);
 		}
 
+		const numericStats = ['attack', 'move', 'range', 'shield', 'target', 'pierce'];
+
 		const enemyStats = html`
 			<span class="stat-bar">
-				<span class="enemy-stat">HP ${this._normalEnemy.hp}</span>
-				<span class="enemy-stat"><img src="images/attack.svg" /> ${this._normalEnemy.attack ?? '-'}</span>
-				<span class="enemy-stat"><img src="images/move.svg" /> ${this._normalEnemy.move ?? '-'}</span>
-				<span class="enemy-stat"><img src="images/range.svg" /> ${this._normalEnemy.range ?? '-'}</span>
-				<span class="enemy-stat"><img src="images/shield.svg" /> ${this._normalEnemy.shield ?? '-'}</span>
-				<span class="enemy-stat"><img src="images/target.svg" /> ${this._normalEnemy.target ?? '-'}</span>
+				<span class="enemy-stat">HP ${normalEnemy.hp}</span>
+				${numericStats.map((stat) => {
+					if (!normalEnemy[stat] || normalEnemy[stat] === 0) {
+						return;
+					}
+					return html`<span class="enemy-stat"
+						><img src="images/${stat}.svg" /> ${normalEnemy[stat] ?? '-'}</span
+					>`;
+				})}
+				<span class="enemy-stat">${normalEnemy.attributes.join(', ')}</span>
 			</span>
 			<span class="stat-bar elite">
-				<span class="enemy-stat">HP ${this._eliteEnemy.hp}</span>
-				<span class="enemy-stat"><img src="images/attack.svg" /> ${this._eliteEnemy.attack ?? '-'}</span>
-				<span class="enemy-stat"><img src="images/move.svg" /> ${this._eliteEnemy.move ?? '-'}</span>
-				<span class="enemy-stat"><img src="images/range.svg" /> ${this._eliteEnemy.range ?? '-'}</span>
-				<span class="enemy-stat"><img src="images/shield.svg" /> ${this._eliteEnemy.shield ?? '-'}</span>
-				<span class="enemy-stat"><img src="images/target.svg" /> ${this._eliteEnemy.target ?? '-'}</span>
+				<span class="enemy-stat">HP ${eliteEnemy.hp}</span>
+				${numericStats.map((stat) => {
+					if (!eliteEnemy[stat] || eliteEnemy[stat] === 0) {
+						return;
+					}
+					return html`<span class="enemy-stat"
+						><img src="images/${stat}.svg" /> ${eliteEnemy[stat] ?? '-'}</span
+					>`;
+				})}
+				<span class="enemy-stat">${eliteEnemy.attributes.join(', ')}</span>
 			</span>
 		`;
 
 		return html`
 			<span class="header-bar">
-				<span class="enemy-name">Level ${this.level} ${this._normalEnemy.name}</span>
+				<span class="enemy-name">${this.name}</span>
 				<span class="instance-buttons">${instanceButtons}</span>
 				<span class="stats-bar">${enemyStats}</span>
 			</span>
-			<span class="enemy-instances">
-				${enemyInstances}
-			</span>
+			<span class="enemy-instances"> ${enemyInstances} </span>
 		`;
 	}
 }

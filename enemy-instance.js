@@ -2,6 +2,8 @@ import { LitElement, html, css } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/co
 import { Enemy } from './Enemy.js';
 import './enemy-healthbar.js';
 
+const statusEffects = ['disarm', 'immobilize', 'invisible', 'muddle', 'poison', 'strengthen', 'stun', 'wound'];
+
 export class GloomEnemyInstance extends LitElement {
 	static get properties() {
 		return {
@@ -12,6 +14,7 @@ export class GloomEnemyInstance extends LitElement {
 			_maxHealth: { type: Number },
 			_eliteMaxHealth: { type: Number },
 			_currentHealth: { type: Number },
+			_statusEffects: { type: Array },
 		};
 	}
 
@@ -31,7 +34,7 @@ export class GloomEnemyInstance extends LitElement {
 				margin: 0.1rem;
 			}
 			.elite {
-				background-color: rgb(117, 115, 3);
+				background-color: rgba(117, 115, 3, 0.5);
 				color: white;
 			}
 			button {
@@ -40,12 +43,32 @@ export class GloomEnemyInstance extends LitElement {
 				font-family: 'PirataOne', 'Open Sans', sans-serif;
 				font-size: 0.8rem;
 			}
-			.elite-button {
+			.open-dialog-button {
 				width: 2rem;
 			}
 			.health-button {
 				width: 1.5rem;
 				font-size: 1.2rem;
+			}
+			dialog > .wrapper {
+				display: flex;
+				flex-direction: column;
+			}
+			dialog::backdrop {
+				backdrop-filter: blur(1px);
+			}
+			button.dialog-button {
+				border: 1px solid black;
+				border-radius: 0.2rem;
+				padding: 0 0.5rem 0 0.5rem;
+			}
+			button.status-button.selected {
+				background: lightslategrey;
+			}
+			.status-image {
+				height: 1.2rem;
+				width: 1.2rem;
+				vertical-align: middle;
 			}
 		`;
 	}
@@ -55,6 +78,7 @@ export class GloomEnemyInstance extends LitElement {
 		this.id = '';
 		this.instanceNumber = 0;
 		this.level = 0;
+		this._statusEffects = [];
 	}
 
 	firstUpdated(changedProperties) {
@@ -67,24 +91,6 @@ export class GloomEnemyInstance extends LitElement {
 		this._maxHealth = normalEnemy.hp;
 		this._eliteMaxHealth = eliteEnemy.hp;
 		this._currentHealth = this._maxHealth;
-	}
-
-	render() {
-		const isEliteButton = html` <button class="elite-button" @click="${this._toggleElite}"># ${this.instanceNumber}</button>`;
-		const healthbar = html`
-			<enemy-healthbar
-				currentHealth=${this._currentHealth}
-				maxHealth="${this._isElite ? this._eliteMaxHealth : this._maxHealth}"
-			></enemy-healthbar>
-		`;
-		const increaseHealthButton = html` <button class="health-button" @click="${this._increaseHealth}">+</button>`;
-		const decreaseHealthButton = html` <button class="health-button" @click="${this._decreaseHealth}">-</button>`;
-
-		return html`
-			<div class="wrapper ${this._isElite ? 'elite' : ''}">
-				${isEliteButton} ${healthbar} ${increaseHealthButton} ${decreaseHealthButton}
-			</div>
-		`;
 	}
 
 	_toggleElite() {
@@ -102,6 +108,70 @@ export class GloomEnemyInstance extends LitElement {
 		if (this._currentHealth - 1 >= 0) {
 			this._currentHealth--;
 		}
+	}
+
+	_openDialog() {
+		this.shadowRoot.querySelector('dialog').showModal();
+	}
+
+	_closeDialog() {
+		this.shadowRoot.querySelector('dialog').close();
+	}
+
+	_toggleStatusEffect(name) {
+		if (this._statusEffects.includes(name)) {
+			this._statusEffects = this._statusEffects.filter((status) => status !== name);
+		} else {
+			if (!statusEffects.includes(name)) {
+				throw new Error(`Status effect "${name}" is not a valid status effect`);
+			}
+
+			this._statusEffects.push(name);
+			this.requestUpdate();
+		}
+	}
+
+	_clearStatusEffects() {
+		this._statusEffects = [];
+	}
+
+	render() {
+		const statusEffectButtons = html`
+			${statusEffects.map((name) => {
+				return html`<button
+					class="dialog-button status-button ${this._statusEffects.includes(name) ? 'selected' : ''}"
+					@click="${this._toggleStatusEffect.bind(this, name)}"
+				>
+					<img class="status-image" src="images/${name}.svg" />
+				</button>`;
+			})}
+		`;
+		const appliedStatusEffects = this._statusEffects.map((statusEffect) => {
+			return html`<img class="status-image" src="images/${statusEffect}.svg" />`;
+		});
+
+		return html`
+			<div class="wrapper ${this._isElite ? 'elite' : ''}">
+				<dialog>
+					<div class="wrapper">
+						<span>${statusEffectButtons}</span>
+						<span>
+							<button class="dialog-button" @click="${this._clearStatusEffects}">Clear</button>
+							<button class="dialog-button" @click="${this._toggleElite}">Toggle Rank</button>
+							<button class="dialog-button" @click="${this._closeDialog}">Close</button>
+						</span>
+					</div>
+				</dialog>
+				<button class="open-dialog-button" @click="${this._openDialog}"># ${this.instanceNumber}</button>
+				<enemy-healthbar
+					currentHealth=${this._currentHealth}
+					maxHealth="${this._isElite ? this._eliteMaxHealth : this._maxHealth}"
+				></enemy-healthbar>
+				<button class="health-button" @click="${this._increaseHealth}">+</button>
+				<button class="health-button" @click="${this._decreaseHealth}">-</button>
+				${appliedStatusEffects}
+			</div>
+		`;
 	}
 }
 

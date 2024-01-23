@@ -1,48 +1,32 @@
-const enemyData = {
-	banditGuard: {
-		name: 'Bandit Guard',
-		maxInstances: 21,
-		statsByLevel: [
-			[
-				{
-					hp: 5,
-					attack: 2,
-					move: 2,
-				},
-				{
-					hp: 9,
-					attack: 3,
-					move: 2,
-				},
-			],
-		],
-	},
-};
+import { enemyData } from './enemy-data.js';
 
 export class Enemy {
-	name = '';
-	maxInstances = 0;
 	hp = 0;
 	attack = 0;
 	move = 0;
 	range = 0;
 	shield = 0;
 	target = 0;
+	pierce = 0;
+	retaliate = 0;
+	attributes = [];
 
-	constructor(id, level, isElite) {
-		const enemy = enemyData[id];
+	constructor(name, level, isElite) {
+		const enemy = enemyData[name];
 		if (!enemy) {
-			throw new Error(`Enemy with ID ${id} not found in enemy data`);
+			throw new Error(`Enemy with ID ${name} not found in enemy data`);
 		}
 
-		const stats = enemy.statsByLevel[level][isElite ? 1 : 0];
-		this.name = enemyData[id].name;
-		this.maxInstances = enemyData[id].maxInstances;
-		this.hp = stats.hp;
+		const stats = enemy.level[level][isElite ? 'elite' : 'normal'];
+		this.name = name;
+		this.hp = stats.health;
 		this.attack = stats.attack;
 		this.move = stats.move;
 		this.range = stats.range;
 		this.shield = stats.shield;
 		this.target = stats.target;
+		this.pierce = stats.pierce;
+		this.retaliate = stats.retaliate;
+		this.attributes = stats.attributes ?? [];
 	}
 }

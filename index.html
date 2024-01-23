@@ -2,9 +2,9 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
+		<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0" />
 		<title>Gloomhaven Monster Tracker</title>
-		<script src="gloom-enemy.js" defer type="module"></script>
+		<script src="gloom-app.js" defer type="module"></script>
 		<style>
 			@font-face {
 				font-family: PirataOne;
@@ -16,25 +16,20 @@
 			}
 
 			body {
-				background-color: grey;
+				background-color: lightslategrey;
 				color: white;
+				/* Disable pull-to-refresh, to avoid accidentally clearing the page */
 				overscroll-behavior-y: contain;
 			}
 
-			@media screen and (max-width : 1200px) {
+			@media screen and (max-width: 1200px) {
 				html {
 					font-size: 20px;
 				}
 			}
-
-			h1 {
-				line-height: 0;
-				font-size: 1rem;
-			}
 		</style>
 	</head>
 	<body>
-		<h1>Gloomhaven Monster Tracker</h1>
-		<gloom-enemy id="banditGuard" level="0"></gloom-enemy>
+		<gloom-app scenarioNumber="1" level="0"></gloom-app>
 	</body>
 </html>
