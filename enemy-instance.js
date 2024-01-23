@@ -25,7 +25,6 @@ export class GloomEnemyInstance extends LitElement {
 			}
 			.wrapper {
 				background-color: white;
-				border-radius: 0.2rem;
 				color: black;
 				display: flex;
 				align-items: center;
@@ -44,11 +43,12 @@ export class GloomEnemyInstance extends LitElement {
 				font-size: 0.8rem;
 			}
 			.open-dialog-button {
-				width: 2rem;
+				min-width: 1.5rem;
 			}
 			.health-button {
 				width: 1.5rem;
-				font-size: 1.2rem;
+				font-size: 1rem;
+				font-weight: bold;
 			}
 			dialog > .wrapper {
 				display: flex;
@@ -157,7 +157,12 @@ export class GloomEnemyInstance extends LitElement {
 						<span>${statusEffectButtons}</span>
 						<span>
 							<button class="dialog-button" @click="${this._clearStatusEffects}">Clear</button>
-							<button class="dialog-button ${this._isElite ? 'selected' : ''}" @click="${this._toggleElite}">Elite</button>
+							<button
+								class="dialog-button ${this._isElite ? 'selected' : ''}"
+								@click="${this._toggleElite}"
+							>
+								Elite
+							</button>
 							<button class="dialog-button" @click="${this._closeDialog}">Close</button>
 						</span>
 					</div>

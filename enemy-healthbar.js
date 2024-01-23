@@ -18,7 +18,7 @@ export class Healthbar extends LitElement {
 			.healthbar {
 				background-color: white;
 				height: 2rem;
-				width: 1.2rem;
+				width: 0.8rem;
 				border: black solid 1px;
 				border-radius: 0.2rem;
 				display: flex;
@@ -37,6 +37,8 @@ export class Healthbar extends LitElement {
 			}
 			.health-value {
 				margin-right: 0.1rem;
+				min-width: 0.7rem;
+				text-align: right;
 			}
 		`;
 	}

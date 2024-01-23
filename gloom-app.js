@@ -32,7 +32,7 @@ export class GloomApp extends LitElement {
 				font-size: 1rem;
 			}
 			input {
-				width: 3rem;
+				width: 2rem;
 			}
 		`;
 	}
@@ -49,7 +49,7 @@ export class GloomApp extends LitElement {
 
 	render() {
 		return html`
-			<span class="header-text">Scenario Number: </span>
+			<span class="header-text">Scenario: </span>
 			<input id="scenarioInput" type="number" max="95" value="1" min="1" ?disabled="${this._lockedIn}" />
 			<span class="header-text">Level: </span>
 			<input id="levelInput" type="number" max="7" value="0" min="0" ?disabled="${this._lockedIn}" />

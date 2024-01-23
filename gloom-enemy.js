@@ -24,6 +24,7 @@ export class GloomEnemy extends LitElement {
 				flex-direction: column;
 				border: 3px solid black;
 				padding-left: 0.2rem;
+				padding-right: 0.2rem;
 				font-family: 'PirataOne', 'Open Sans', sans-serif;
 			}
 
@@ -39,15 +40,15 @@ export class GloomEnemy extends LitElement {
 			}
 
 			.enemy-name {
-				font-size: 1.2rem;
+				font-size: larger;
 			}
 
 			.instance-buttons > button {
 				border: 1px solid black;
-				min-width: 1.5rem;
-				min-height: 1.5rem;
-				color: white;
+				width: 2rem;
+				height: 2rem;
 				font-family: 'PirataOne', 'Open Sans', sans-serif;
+				font-size: larger;
 			}
 			button.add-enemy {
 				background-color: #d3d3d3;
@@ -55,11 +56,17 @@ export class GloomEnemy extends LitElement {
 			}
 			button.remove-enemy {
 				background-color: #555555;
+				color: white;
 			}
 
 			.stats-bar {
 				display: inline-flex;
 				flex-direction: row;
+			}
+			@media screen and (max-width: 400px) {
+				.stats-bar {
+					flex-direction: column;
+				}
 			}
 			.stat-bar {
 				display: flex;
