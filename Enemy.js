@@ -11,14 +11,14 @@ export class Enemy {
 	retaliate = 0;
 	attributes = [];
 
-	constructor(name, level, isElite) {
-		const enemy = enemyData[name];
+	constructor(id, level, isElite) {
+		const enemy = enemyData[id];
 		if (!enemy) {
-			throw new Error(`Enemy with ID ${name} not found in enemy data`);
+			throw new Error(`Enemy with ID ${id} not found in enemy data`);
 		}
 
 		const stats = enemy.level[level][isElite ? 'elite' : 'normal'];
-		this.name = name;
+		this.name = enemy.name;
 		this.hp = stats.health;
 		this.attack = stats.attack;
 		this.move = stats.move;

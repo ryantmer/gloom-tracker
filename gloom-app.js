@@ -1,12 +1,7 @@
 import { LitElement, html, css } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js';
 import { enemyData } from './enemy-data.js';
+import { scenarioEnemies } from './scenario-data.js';
 import './gloom-enemy.js';
-
-// TODO: Add the rest of the scenarios
-const scenarioEnemies = [
-	['Bandit Guard', 'Bandit Archer', 'Living Bones'],
-	['Bandit Archer', 'Living Bones', 'Living Corpse'],
-];
 
 export class GloomApp extends LitElement {
 	static get properties() {
@@ -48,18 +43,37 @@ export class GloomApp extends LitElement {
 	}
 
 	render() {
-		return html`
+		const setupBar = html`
 			<span class="header-text">Scenario: </span>
 			<input id="scenarioInput" type="number" max="95" value="1" min="1" ?disabled="${this._lockedIn}" />
 			<span class="header-text">Level: </span>
 			<input id="levelInput" type="number" max="7" value="0" min="0" ?disabled="${this._lockedIn}" />
 			<button id="lockIn" @click="${this._lockIn}" ?disabled="${this._lockedIn}">Lock In</button>
 			<button id="modify" @click="${this._modify}" ?disabled="${!this._lockedIn}">Modify</button>
-			${scenarioEnemies[this._scenarioNumber - 1] &&
-			scenarioEnemies[this._scenarioNumber - 1].sort().map((name) => {
+		`;
+
+		if (this._scenarioNumber === 0) {
+			return setupBar;
+		}
+
+		const enemyIds = scenarioEnemies[this._scenarioNumber] ?? [];
+		if (!enemyIds || enemyIds.length === 0) {
+			return html`
+				${setupBar}
+				<p>Scenario data not found for scenario number ${this._scenarioNumber}</p>
+			`;
+		}
+
+		return html`
+			${setupBar}
+			${enemyIds.map(id => {
+				if (!enemyData[id]) {
+					return html`<p>Enemy with ID ${id} not found in enemy data</p>`;
+				}
+
 				return html`<gloom-enemy
-					name="${name}"
-					maxInstances="${enemyData[name].maxInstances}"
+					id="${id}"
+					maxInstances="${enemyData[id].maxInstances}"
 					level="${this._level}"
 				></gloom-enemy>`;
 			})}

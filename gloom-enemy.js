@@ -1,11 +1,12 @@
 import { LitElement, html, css } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js';
 import { Enemy } from './Enemy.js';
+import { enemyData } from './enemy-data.js';
 import './enemy-instance.js';
 
 export class GloomEnemy extends LitElement {
 	static get properties() {
 		return {
-			name: { type: String },
+			id: { type: String },
 			level: { type: Number },
 			maxInstances: { type: Number },
 			_enemyInstances: { type: Array },
@@ -71,6 +72,7 @@ export class GloomEnemy extends LitElement {
 			.stat-bar {
 				display: flex;
 				flex-direction: row;
+				border: 1px solid black;
 				padding: 0.2rem;
 			}
 			.stat-bar.elite {
@@ -100,7 +102,7 @@ export class GloomEnemy extends LitElement {
 
 	_addEnemyInstance(i) {
 		this._enemyInstances[i] = html`<gloom-enemy-instance
-			id=${this.name}
+			id=${this.id}
 			instanceNumber=${i + 1}
 			level=${this.level}
 		></gloom-enemy-instance>`;
@@ -117,8 +119,8 @@ export class GloomEnemy extends LitElement {
 			return;
 		}
 
-		const normalEnemy = new Enemy(this.name, this.level, false);
-		const eliteEnemy = new Enemy(this.name, this.level, true);
+		const normalEnemy = new Enemy(this.id, this.level, false);
+		const eliteEnemy = new Enemy(this.id, this.level, true);
 
 		const instanceButtons = [];
 		const enemyInstances = [];
@@ -170,7 +172,7 @@ export class GloomEnemy extends LitElement {
 
 		return html`
 			<span class="header-bar">
-				<span class="enemy-name">${this.name}</span>
+				<span class="enemy-name">${enemyData[this.id].name}</span>
 				<span class="instance-buttons">${instanceButtons}</span>
 				<span class="stats-bar">${enemyStats}</span>
 			</span>

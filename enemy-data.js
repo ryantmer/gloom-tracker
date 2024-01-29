@@ -1,5 +1,6 @@
 export const enemyData = {
-	'Ancient Artillery': {
+	ancientArtillery: {
+		name: 'Ancient Artillery',
 		maxInstances: 6,
 		level: [
 			{
@@ -128,7 +129,8 @@ export const enemyData = {
 			},
 		],
 	},
-	'Bandit Archer': {
+	banditArcher: {
+		name: 'Bandit Archer',
 		maxInstances: 6,
 		level: [
 			{
@@ -257,7 +259,8 @@ export const enemyData = {
 			},
 		],
 	},
-	'Bandit Guard': {
+	banditGuard: {
+		name: 'Bandit Guard',
 		maxInstances: 6,
 		level: [
 			{
@@ -393,7 +396,8 @@ export const enemyData = {
 			},
 		],
 	},
-	'Black Imp': {
+	blackImp: {
+		name: 'Black Imp',
 		maxInstances: 10,
 		level: [
 			{
@@ -533,7 +537,8 @@ export const enemyData = {
 			},
 		],
 	},
-	'Cave Bear': {
+	caveBear: {
+		name: 'Cave Bear',
 		maxInstances: 4,
 		level: [
 			{
@@ -665,7 +670,8 @@ export const enemyData = {
 			},
 		],
 	},
-	'City Archer': {
+	cityArcher: {
+		name: 'City Archer',
 		maxInstances: 6,
 		level: [
 			{
@@ -809,7 +815,8 @@ export const enemyData = {
 			},
 		],
 	},
-	'City Guard': {
+	cityGuard: {
+		name: 'City Guard',
 		maxInstances: 6,
 		level: [
 			{
@@ -954,7 +961,8 @@ export const enemyData = {
 			},
 		],
 	},
-	Cultist: {
+	cultist: {
+		name: 'Cultist',
 		maxInstances: 6,
 		level: [
 			{
@@ -1087,7 +1095,8 @@ export const enemyData = {
 			},
 		],
 	},
-	'Deep Terror': {
+	deepTerror: {
+		name: 'Deep Terror',
 		maxInstances: 10,
 		level: [
 			{
@@ -1226,7 +1235,8 @@ export const enemyData = {
 			},
 		],
 	},
-	'Earth Demon': {
+	earthDemon: {
+		name: 'Earth Demon',
 		maxInstances: 6,
 		level: [
 			{
@@ -1359,7 +1369,8 @@ export const enemyData = {
 			},
 		],
 	},
-	'Flame Demon': {
+	flameDemon: {
+		name: 'Flame Demon',
 		maxInstances: 6,
 		level: [
 			{
@@ -1516,7 +1527,8 @@ export const enemyData = {
 			},
 		],
 	},
-	'Frost Demon': {
+	frostDemon: {
+		name: 'Frost Demon',
 		maxInstances: 6,
 		level: [
 			{
@@ -1655,7 +1667,8 @@ export const enemyData = {
 			},
 		],
 	},
-	'Forest Imp': {
+	forestImp: {
+		name: 'Forest Imp',
 		maxInstances: 10,
 		level: [
 			{
@@ -1812,7 +1825,8 @@ export const enemyData = {
 			},
 		],
 	},
-	'Giant Viper': {
+	giantViper: {
+		name: 'Giant Viper',
 		maxInstances: 10,
 		level: [
 			{
@@ -1953,7 +1967,8 @@ export const enemyData = {
 			},
 		],
 	},
-	'Harrower Infester': {
+	harrowerInfester: {
+		name: 'Harrower Infester',
 		maxInstances: 4,
 		level: [
 			{
@@ -2092,7 +2107,7 @@ export const enemyData = {
 			},
 		],
 	},
-	Hound: {
+	hound: {
 		maxInstances: 6,
 		level: [
 			{
@@ -2231,7 +2246,8 @@ export const enemyData = {
 			},
 		],
 	},
-	'Inox Archer': {
+	inoxArcher: {
+		name: 'Inox Archer',
 		maxInstances: 6,
 		level: [
 			{
@@ -2362,7 +2378,8 @@ export const enemyData = {
 			},
 		],
 	},
-	'Inox Guard': {
+	inoxGuard: {
+		name: 'Inox Guard',
 		maxInstances: 6,
 		level: [
 			{
@@ -2499,7 +2516,8 @@ export const enemyData = {
 			},
 		],
 	},
-	'Inox Shaman': {
+	inoxShaman: {
+		name: 'Inox Shaman',
 		maxInstances: 4,
 		level: [
 			{
@@ -2624,7 +2642,8 @@ export const enemyData = {
 			},
 		],
 	},
-	'Living Bones': {
+	livingBones: {
+		name: 'Living Bones',
 		maxInstances: 10,
 		level: [
 			{
@@ -2779,7 +2798,8 @@ export const enemyData = {
 			},
 		],
 	},
-	'Living Corpse': {
+	livingCorpse: {
+		name: 'Living Corpse',
 		maxInstances: 6,
 		level: [
 			{
@@ -2910,7 +2930,8 @@ export const enemyData = {
 			},
 		],
 	},
-	'Living Spirit': {
+	livingSpirit: {
+		name: 'Living Spirit',
 		maxInstances: 6,
 		level: [
 			{
@@ -3067,7 +3088,8 @@ export const enemyData = {
 			},
 		],
 	},
-	Lurker: {
+	lurker: {
+		name: 'Lurker',
 		maxInstances: 6,
 		level: [
 			{
@@ -3234,7 +3256,8 @@ export const enemyData = {
 			},
 		],
 	},
-	Ooze: {
+	ooze: {
+		name: 'Ooze',
 		maxInstances: 10,
 		level: [
 			{
@@ -3381,7 +3404,8 @@ export const enemyData = {
 			},
 		],
 	},
-	'Night Demon': {
+	nightDemon: {
+		name: 'Night Demon',
 		maxInstances: 6,
 		level: [
 			{
@@ -3522,7 +3546,8 @@ export const enemyData = {
 			},
 		],
 	},
-	'Rending Drake': {
+	rendingDrake: {
+		name: 'Rending Drake',
 		maxInstances: 6,
 		level: [
 			{
@@ -3661,7 +3686,8 @@ export const enemyData = {
 			},
 		],
 	},
-	'Savvas Icestorm': {
+	savvasIcestorm: {
+		name: 'Savvas Icestorm',
 		maxInstances: 4,
 		level: [
 			{
@@ -3814,7 +3840,8 @@ export const enemyData = {
 			},
 		],
 	},
-	'Savvas Lavaflow': {
+	savvasLavaflow: {
+		name: 'Savvas Lavaflow',
 		maxInstances: 4,
 		level: [
 			{
@@ -3953,7 +3980,8 @@ export const enemyData = {
 			},
 		],
 	},
-	'Spitting Drake': {
+	spittingDrake: {
+		name: 'Spitting Drake',
 		maxInstances: 6,
 		level: [
 			{
@@ -4094,7 +4122,8 @@ export const enemyData = {
 			},
 		],
 	},
-	'Stone Golem': {
+	stoneGolem: {
+		name: 'Stone Golem',
 		maxInstances: 6,
 		level: [
 			{
@@ -4234,7 +4263,8 @@ export const enemyData = {
 			},
 		],
 	},
-	'Sun Demon': {
+	sunDemon: {
+		name: 'Sun Demon',
 		maxInstances: 6,
 		level: [
 			{
@@ -4391,7 +4421,8 @@ export const enemyData = {
 			},
 		],
 	},
-	'Vermling Scout': {
+	vermlingScout: {
+		name: 'Vermling Scout',
 		maxInstances: 10,
 		level: [
 			{
@@ -4516,7 +4547,8 @@ export const enemyData = {
 			},
 		],
 	},
-	'Vermling Shaman': {
+	vermlingShaman: {
+		name: 'Vermling Shaman',
 		maxInstances: 6,
 		level: [
 			{
@@ -4665,7 +4697,8 @@ export const enemyData = {
 			},
 		],
 	},
-	'Wind Demon': {
+	windDemon: {
+		name: 'Wind Demon',
 		maxInstances: 6,
 		level: [
 			{
