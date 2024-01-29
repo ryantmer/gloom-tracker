@@ -29,6 +29,13 @@ export class GloomApp extends LitElement {
 			input {
 				width: 2rem;
 			}
+			gloom-enemy {
+				border: 3px solid black;
+				border-bottom: none;
+			}
+			gloom-enemy:last-child {
+				border-bottom: 3px solid black;
+			}
 		`;
 	}
 

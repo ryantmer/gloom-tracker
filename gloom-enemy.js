@@ -23,7 +23,6 @@ export class GloomEnemy extends LitElement {
 			:host {
 				display: flex;
 				flex-direction: column;
-				border: 3px solid black;
 				padding-left: 0.2rem;
 				padding-right: 0.2rem;
 				font-family: 'PirataOne', 'Open Sans', sans-serif;
