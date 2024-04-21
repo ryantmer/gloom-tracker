@@ -1,4 +1,4 @@
-import { LitElement, html, css } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js';
+import { LitElement, html, css, nothing } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js';
 import { Enemy } from './Enemy.js';
 import { enemyData } from './enemy-data.js';
 import './enemy-instance.js';
@@ -40,13 +40,13 @@ export class GloomEnemy extends LitElement {
 			}
 
 			.enemy-name {
-				font-size: larger;
+				font-size: large;
 			}
 
 			.instance-buttons > button {
 				border: 1px solid black;
-				width: 2rem;
-				height: 2rem;
+				width: 1.8rem;
+				height: 1.8rem;
 				font-family: 'PirataOne', 'Open Sans', sans-serif;
 				font-size: larger;
 			}
@@ -62,6 +62,7 @@ export class GloomEnemy extends LitElement {
 			.stats-bar {
 				display: inline-flex;
 				flex-direction: row;
+				align-self: stretch;
 			}
 			@media screen and (max-width: 400px) {
 				.stats-bar {
@@ -71,22 +72,27 @@ export class GloomEnemy extends LitElement {
 			.stat-bar {
 				display: flex;
 				flex-direction: row;
-				border: 1px solid black;
-				padding: 0.2rem;
+				align-items: stretch;
 			}
 			.stat-bar.elite {
 				background: rgba(117, 115, 3, 0.5);
 			}
 			.enemy-stat {
-				margin-right: 0.5rem;
-				font-size: 0.7rem;
+				padding: 0.2rem;
+				font-size: normal;
+				border-left: 1px solid black;
+				border-bottom: 1px solid black;
+				display: flex;
+				align-items: center;
 			}
 			.stat-bar > *:last-child {
 				margin-right: 0;
+				border-right: 1px solid black;
 			}
 			.enemy-stat > img {
 				height: 0.8rem;
 				width: 0.8rem;
+				margin-right: 0.2rem;
 				vertical-align: middle;
 			}
 			.enemy-instances {
@@ -146,14 +152,21 @@ export class GloomEnemy extends LitElement {
 			<span class="stat-bar">
 				<span class="enemy-stat">HP ${normalEnemy.hp}</span>
 				${numericStats.map((stat) => {
+					console.log(stat);
+					console.log('-- nope');
 					if (!normalEnemy[stat] || normalEnemy[stat] === 0) {
-						return;
+						return nothing;
 					}
 					return html`<span class="enemy-stat"
 						><img src="images/${stat}.svg" /> ${normalEnemy[stat] ?? '-'}</span
 					>`;
 				})}
-				<span class="enemy-stat">${normalEnemy.attributes.join(', ')}</span>
+				${
+					normalEnemy.attributes.length > 0
+						? html`<span class="enemy-stat">${normalEnemy.attributes.join(', ')}</span>`
+						: nothing
+				}
+
 			</span>
 			<span class="stat-bar elite">
 				<span class="enemy-stat">HP ${eliteEnemy.hp}</span>
@@ -165,7 +178,11 @@ export class GloomEnemy extends LitElement {
 						><img src="images/${stat}.svg" /> ${eliteEnemy[stat] ?? '-'}</span
 					>`;
 				})}
-				<span class="enemy-stat">${eliteEnemy.attributes.join(', ')}</span>
+				${
+					eliteEnemy.attributes.length > 0
+						? html`<span class="enemy-stat">${eliteEnemy.attributes.join(', ')}</span>`
+						: nothing
+				}
 			</span>
 		`;
 
