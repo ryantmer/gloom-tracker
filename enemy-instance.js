@@ -21,7 +21,9 @@ export class GloomEnemyInstance extends LitElement {
 	static get styles() {
 		return css`
 			:host {
-				margin: 0.1rem;
+				border: 2px solid black;
+				margin-top: 0.2rem;
+				margin-right: 0.2rem;
 			}
 			.wrapper {
 				background-color: white;
@@ -37,13 +39,13 @@ export class GloomEnemyInstance extends LitElement {
 				color: white;
 			}
 			button {
-				padding: 0;
-				height: 2rem;
+				border: 1px solid black;
+				height: 1.8rem;
 				font-family: 'PirataOne', 'Open Sans', sans-serif;
-				font-size: 0.8rem;
+				font-size: larger;
 			}
 			.open-dialog-button {
-				min-width: 1.5rem;
+				min-width: 1.8rem;
 			}
 			.health-button {
 				width: 1.5rem;
@@ -96,6 +98,7 @@ export class GloomEnemyInstance extends LitElement {
 	_toggleElite() {
 		this._isElite = !this._isElite;
 		this._currentHealth = this._isElite ? this._eliteMaxHealth : this._maxHealth;
+		this._closeDialog();
 	}
 
 	_increaseHealth(e) {
@@ -129,10 +132,12 @@ export class GloomEnemyInstance extends LitElement {
 			this._statusEffects.push(name);
 			this.requestUpdate();
 		}
+		this._closeDialog();
 	}
 
 	_clearStatusEffects() {
 		this._statusEffects = [];
+		this._closeDialog();
 	}
 
 	render() {
@@ -167,7 +172,7 @@ export class GloomEnemyInstance extends LitElement {
 						</span>
 					</div>
 				</dialog>
-				<button class="open-dialog-button" @click="${this._openDialog}"># ${this.instanceNumber}</button>
+				<button class="open-dialog-button" @click="${this._openDialog}">${this.instanceNumber}</button>
 				<button class="health-button" @click="${this._decreaseHealth}">-</button>
 				<enemy-healthbar
 					currentHealth=${this._currentHealth}

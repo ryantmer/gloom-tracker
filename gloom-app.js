@@ -6,9 +6,9 @@ import './gloom-enemy.js';
 export class GloomApp extends LitElement {
 	static get properties() {
 		return {
-			_scenarioNumber: { type: Number },
-			_level: { type: Number },
-			_lockedIn: { type: Number },
+			_scenarioNumber: { state: true },
+			_level: { state: true },
+			_lockedIn: { state: true },
 		};
 	}
 
@@ -30,8 +30,7 @@ export class GloomApp extends LitElement {
 				width: 2rem;
 			}
 			gloom-enemy {
-				border: 3px solid black;
-				border-bottom: none;
+				border-top: 3px solid black;
 			}
 			gloom-enemy:last-child {
 				border-bottom: 3px solid black;
@@ -52,9 +51,9 @@ export class GloomApp extends LitElement {
 	render() {
 		const setupBar = html`
 			<span class="header-text">Scenario: </span>
-			<input id="scenarioInput" type="number" max="95" value="1" min="1" ?disabled="${this._lockedIn}" />
+			<input id="scenarioInput" type="number" max="95" value="1" min="1" ?disabled="${this._lockedIn}" value="${this._scenarioNumber}" />
 			<span class="header-text">Level: </span>
-			<input id="levelInput" type="number" max="7" value="0" min="0" ?disabled="${this._lockedIn}" />
+			<input id="levelInput" type="number" max="7" value="0" min="0" ?disabled="${this._lockedIn}" value="${this._level}" />
 			<button id="lockIn" @click="${this._lockIn}" ?disabled="${this._lockedIn}">Lock In</button>
 			<button id="modify" @click="${this._modify}" ?disabled="${!this._lockedIn}">Modify</button>
 		`;

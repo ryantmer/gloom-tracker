@@ -2108,6 +2108,7 @@ export const enemyData = {
 		],
 	},
 	hound: {
+		name: 'Hound',
 		maxInstances: 6,
 		level: [
 			{

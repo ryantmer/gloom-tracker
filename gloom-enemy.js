@@ -23,8 +23,8 @@ export class GloomEnemy extends LitElement {
 			:host {
 				display: flex;
 				flex-direction: column;
-				padding-left: 0.2rem;
-				padding-right: 0.2rem;
+				padding: 0.2rem;
+				padding-top: 0;
 				font-family: 'PirataOne', 'Open Sans', sans-serif;
 			}
 
@@ -152,8 +152,6 @@ export class GloomEnemy extends LitElement {
 			<span class="stat-bar">
 				<span class="enemy-stat">HP ${normalEnemy.hp}</span>
 				${numericStats.map((stat) => {
-					console.log(stat);
-					console.log('-- nope');
 					if (!normalEnemy[stat] || normalEnemy[stat] === 0) {
 						return nothing;
 					}
@@ -188,7 +186,7 @@ export class GloomEnemy extends LitElement {
 
 		return html`
 			<span class="header-bar">
-				<span class="enemy-name">${enemyData[this.id].name}</span>
+				<span class="enemy-name">${enemyData[this.id].name ?? console.error('Enemy has no name:', this.id)}</span>
 				<span class="instance-buttons">${instanceButtons}</span>
 				<span class="stats-bar">${enemyStats}</span>
 			</span>
