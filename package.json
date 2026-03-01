@@ -4,7 +4,7 @@
 		"format": "prettier --write ."
 	},
 	"devDependencies": {
-		"@web/dev-server": "^0.4.1",
+		"@web/dev-server": "^0.4.6",
 		"prettier": "^3.2.4"
 	},
 	"prettier": {
